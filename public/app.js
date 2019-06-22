@@ -24,11 +24,11 @@ $.getJSON("/articles", function(data) {
       .then(function(data) {
         console.log(data);
         // The title of the article
-        $("#comments").append("<h2>" + data.headline + "</h2>");
+        $("#comments").append("<h3>" + data.headline + "</h3>");
         // A textarea to add a new comment body
         $("#comments").append("<textarea id='bodyinput' name='body'></textarea>");
         // A button to submit a new comment, with the id of the article saved to it
-        $("#comments").append("<button data-id='" + data._id + "' id='savecomment'>Save Comment</button>");
+        $("#comments").append("<br><button data-id='" + data._id + "' id='savecomment'>Save Comment</button>");
   
         // If there's a note in the article
         if (data.comment) {

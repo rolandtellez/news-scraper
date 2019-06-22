@@ -34,12 +34,12 @@ mongoose.connect("mongodb://localhost/news-scraper", { useNewUrlParser: true });
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
-  axios.get("http://www.nytimes.com/").then(function(response) {
+  axios.get("https://www.thehardtimes.net/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
     // Now, we grab every a within an article tag, and do the following:
-    $("article a").each(function(i, element) {
+    $("article").each(function(i, element) {
       // Save an empty result object
       var result = {};
 
@@ -51,6 +51,7 @@ app.get("/scrape", function(req, res) {
         .find("p")
         .text();  
       result.link = $(this)
+        .find("a")
         .attr("href");
 
        console.log(result); 
