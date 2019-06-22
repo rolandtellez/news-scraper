@@ -26,8 +26,14 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-// Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/news-scraper", { useNewUrlParser: true });
+// If deployed, use the deployed database. Otherwise use the local news-scraper database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/news-scraper";
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+
+
+// // Connect to the Mongo DB
+// mongoose.connect("mongodb://localhost/news-scraper", { useNewUrlParser: true });
 
 // Routes
 
